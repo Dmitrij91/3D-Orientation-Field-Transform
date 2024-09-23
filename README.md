@@ -1,8 +1,6 @@
 # 3D-Orientation-Field-Transform
 3D Orientation Field Transform for Vascular Structure Enhancement  This repository contains the implementation of the 3D Orientation Field Transform (OFT) algorithm for enhancing vascular and tubular structures in noisy 3D images. 
 
-# 3D Orientation Field Transform for Vascular Structure Enhancement
-
 This repository provides an implementation of the **3D Orientation Field Transform (OFT)** algorithm, which enhances vascular and tubular structures in noisy 3D images. The method is adapted from the research paper that introduces the 3D OFT as an effective solution for enhancing tubular structures in both synthetic and real-world datasets, including transmission electron microscopy (TEM) tomograms.
 
 > **Note:** This repository is not original research but an implementation based on the algorithm described in the referenced paper. See the citation section for details.
@@ -15,10 +13,9 @@ This repository provides an implementation of the **3D Orientation Field Transfo
 - **Modular and Flexible**: Can be used in conjunction with other image processing techniques for tasks like segmentation and detection.
 
 ## Requirements
-- Python 3.x
-- NumPy
+- Python 3.9
+- Cython
 - SciPy
-- OpenCV (optional for visualization)
 - Additional dependencies as listed in `requirements.txt`
 
 ## Installation
@@ -27,12 +24,14 @@ This repository provides an implementation of the **3D Orientation Field Transfo
    ```bash
    git clone https://github.com/yourusername/3D-Orientation-Field-Transform.git
    cd 3D-Orientation-Field-Transform
+2. Install the required Python packages:
+   ```bash
+    pip install -r requirements.txt
+## Usage 
+   Applying the OFT Filter:
+   ```bash
+   python oft_3d.py --input <preprocessed_image> --output <enhanced_image>
 
-    Install the required Python packages:
-
-```pip install -r requirements.txt
-
-```python preprocessing/noise_reduction.py --input <input_image> --output <output_image>
 
 python oft_3d.py --input <preprocessed_image> --output <enhanced_image>
 
@@ -42,11 +41,10 @@ python oft_3d.py --input synthetic_volume.nii --output enhanced_volume.nii --noi
 
 If you use this code in your research, please cite the original paper:
 
-@article{author2024oft,
-  title={3D Orientation Field Transform for Vascular Structure Enhancement},
-  author={Author, A. and Contributor, B.},
-  journal={Journal of Image Processing},
+@article{Yeung:2024,
+  title={3D orientation field transform},
+  author={Yeung, W. C., Xiaohao L., Zizhen K., Byung-Ho},
+  journal={Pattern Analysis and Applications},
   year={2024},
-  volume={XX},
-  pages={YY--ZZ}
+  volume={27}
 }
