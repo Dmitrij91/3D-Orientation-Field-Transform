@@ -1,8 +1,8 @@
 from scipy.spatial.distance import euclidean
 from scipy.sparse import csr_matrix
 import numpy as np
-from Cython_OFT import OFT_Graph_Utilities as cgraph
-from Cython_OFT import OFT_Distance_Utilities_Cython
+from Fast_Marching_Cython import Fast_Marching_Graph_Utilities as cgraph
+from Fast_Marching_Cython import Distance_Utilities_Cython
 from Distance_Utilities import dist
 
 def distance_stein(F, G):
