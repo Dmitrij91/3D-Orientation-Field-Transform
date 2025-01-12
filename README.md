@@ -11,7 +11,7 @@ The **3D Orientation Field Transform (OFT)** algorithm is based on research that
 The line integral operator is defined by:
 
 $$
-\mathcal{R}[I](x,\hat{d} =\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(x+s\hat{d})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,
+\mathcal{R}[I](x,\hat{d}) =\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(x+s\hat{d})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,
 $$
 
 This operator defines the orientation field transform by maximizing the intensity response over directions $\mathbf{d} \in \mathbb{R}^3$, uniformly distributed over the 2-sphere.
@@ -22,12 +22,13 @@ The **mean** and **variance** transforms are given by:
 
 
 $$
-{\mathcal{F}_{1}}[{\mathcal{R}}](\mathbf{x})=\operatorname*{max}_{{\mathrm{be}}{\bar{V}}^{3}}{\mathcal{R}}[I](\mathbf{x},{\hat{\mathbf{d}}}) \qquad \mathcal{F}_{2}[\mathcal{Q}]({\bf x})=\arg\operatorname*{max}_{{\bf\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I]({\bf x},\hat{{\bf b}}),
+{\mathcal{F}_{1}}[{\mathcal{R}}](x)=\operatorname*{max}_{{\mathrm{be}}{\bar{V}}^{3}}{\mathcal{R}}[I](x,{\hat{d}}) \qquad \mathcal{F}_{2}[\mathcal{Q}](x)=\arg\operatorname*{max}_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I](x,\hat{b}),
 $$
 
 $$
-{\mathcal{M}}[{\mathcal{R}}](\mathbf{x})={\frac{1}{|{\bar{V}}^{3}|}}\sum_{\mathrm{d}\in{\bar{V}}^{3}}{\mathcal{R}}[I](\mathbf{x},\mathbf{\hat{d}}) \qquad {\mathcal{V}}[\mathcal{R}]({\bf x})={\frac{1}{|\vec{V}^{3}|}}\sum_{\mathrm{jef}}|\mathcal{N}|\mathcal{R}|({\bf x})-\mathcal{R}[I]({\bf x},\hat{{\bf d}})|,
+{\mathcal{M}}[{\mathcal{R}}](x)={\frac{1}{|{\bar{V}}^{3}|}}\sum_{\mathrm{d}\in{\bar{V}}^{3}}{\mathcal{R}}[I](x,\hat{d}) \qquad {\mathcal{V}}[\mathcal{R}](x)={\frac{1}{|\vec{V}^{3}|}}\sum_{\mathrm{jef}}|\mathcal{N}|\mathcal{R}|(x)-\mathcal{R}[I](x,\hat{d})|,
 $$
+
 
 The filter outputs are illustrated by the following slice view through processed 3D volume 
 
