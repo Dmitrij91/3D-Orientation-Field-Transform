@@ -16,9 +16,12 @@ $$
 
 This operator defines the orientation field transform by maximizing the intensity response over directions $d \in \mathbb{R}^3$, uniformly distributed over the 2-sphere.
 
+
+
 $$
-\mathcal{F}_{1}[ {\mathcal{R}}]  (x)= max_{V}
+F_{1}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad F_{2}[\mathcal{Q}] (x)= argmax_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
 $$
+
 
 ### Mean and Variance Transforms
 
