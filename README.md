@@ -15,7 +15,9 @@ $$
 $$
 
 
-$$\mathcal{R}[I] (x,\hat{d})=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(x+s\hat{d})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,$$
+$$
+\mathcal{R}[I] (x,\hat{d})=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(x+s\hat{d})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,
+$$
 
 This operator defines the orientation field transform by maximizing the intensity response over directions $d \in \mathbb{R}^3$, uniformly distributed over the 2-sphere.
 
