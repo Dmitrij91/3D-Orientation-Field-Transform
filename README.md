@@ -27,6 +27,7 @@ $$
 {\mathcal{M}}[{\mathcal{R}}](x)={\frac{1}{|{\bar{V}}^{3}|}}\sum_{\mathrm{d}\in{\bar{V}}^{3}}{\mathcal{R}}[I](x,\mathbf{\hat{d}}) \qquad {\mathcal{V}}[\mathcal{R}]({\bf x})={\frac{1}{|\vec{V}^{3}|}}\sum_{\mathrm{jef}}|\mathcal{N}|\mathcal{R}|({\bf x})-\mathcal{R}[I]({\bf x},\hat{{\bf d}})|,
 $$
 
+
 The filter outputs are illustrated by the following slice view through processed 3D volume 
 
 <p align="center">
