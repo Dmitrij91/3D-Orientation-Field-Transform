@@ -1,49 +1,98 @@
-# 3D-Orientation-Field-Transform
-3D Orientation Field Transform for Vascular Structure Enhancement  This repository contains the implementation of the 3D Orientation Field Transform (OFT) algorithm for enhancing vascular and tubular structures in noisy 3D images. 
+# Vascular Enhancement Toolbox
 
-This repository provides an implementation of the **3D Orientation Field Transform (OFT)** algorithm, which enhances vascular and tubular structures in noisy 3D images. The method is adapted from the research paper that introduces the 3D OFT as an effective solution for enhancing tubular structures in both synthetic and real-world datasets, including transmission electron microscopy (TEM) tomograms.
+Vascular Enhancement is a Python/Cython toolbox with GPU-accelerated convolution routines for preprocessing vascular and tubular structures in noisy 3D images. The toolbox is designed to enhance and complete vascular data, particularly for OCTA (optical coherence tomography angiography) imaging, including handling noisy and corrupted datasets. The toolbox implements the following algorithms:
 
-> **Note:** This repository is not original research but an implementation based on the algorithm described in the referenced paper. See the citation section for details.
+## 3D Orientation Field Transform (OFT)
+
+The **3D Orientation Field Transform (OFT)** algorithm is based on research that adapts the 3D OFT as an effective solution for enhancing tubular structures in both synthetic and real-world datasets, including transmission electron microscopy (TEM) tomograms. This method processes noisy and corrupted data by transforming it with the following three key features:
+
+### Line Integral Operator
+
+The line integral operator is defined by:
+
+$$\mathcal{R}[I](\mathbf{x},\hat{\mathbf{d}})=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(\mathbf{x}+s\hat{\mathbf{d}})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,$$
+
+This operator defines the orientation field transform by maximizing the intensity response over directions $\mathbf{d} \in \mathbb{R}^3$, uniformly distributed over the 2-sphere.
+
+### Mean and Variance Transforms
+
+The **mean** and **variance** transforms are given by:
+
+
+$$
+{\mathcal{F}_{1}}[{\mathcal{R}}](\mathbf{x})=\operatorname*{max}_{{\mathrm{be}}{\bar{V}}^{3}}{\mathcal{R}}[I](\mathbf{x},{\hat{\mathbf{d}}}) \qquad \mathcal{F}_{2}[\mathcal{Q}]({\bf x})=\arg\operatorname*{max}_{{\bf\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I]({\bf x},\hat{{\bf b}}),
+$$
+
+$$
+{\mathcal{M}}[{\mathcal{R}}](\mathbf{x})={\frac{1}{|{\bar{V}}^{3}|}}\sum_{\mathrm{d}\in{\bar{V}}^{3}}{\mathcal{R}}[I](\mathbf{x},\mathbf{\hat{d}}) \qquad {\mathcal{V}}[\mathcal{R}]({\bf x})={\frac{1}{|\vec{V}^{3}|}}\sum_{\mathrm{jef}}|\mathcal{N}|\mathcal{R}|({\bf x})-\mathcal{R}[I]({\bf x},\hat{{\bf d}})|,
+$$
+
+The filter outputs are illustrated by the following slice view through processed 3D volume 
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="./docs/oct_visualization_transparent.gif" alt="3D Orientation Field (Sclice View) " width="600" height="600"/></td>
+    </tr>
+  </table>
+</p>
+
+This visualization depicts from left to right, top to bottom:
+1. Raw data
+2. 3D Orientation Field
+3. Mean Response
+4. Variance Response
+5. Filter responses from previously processed data, including mean and variance products.
 
 ## Features
-- **Orientation Field Transform (OFT) Filter**: Enhances 3D tubular structures using the combination of the maximum, mean, and absolute deviation of line integrals and alignment integrals.
+- **Orientation Field Transform (OFT) Filter**: Enhances 3D tubular structures by combining maximum, mean, and variance of line integrals and alignment integrals.
 - **Vascular Enhancement in Noisy Data**: Handles noisy, oriented, and curved structures, performing well in low signal-to-noise ratio (SNR) conditions.
-- **Data Preprocessing**: Includes noise reduction and intensity normalization to prepare images for vascular enhancement.
-- **Applicable to 3D Volumes**: While primarily designed for 3D images, the algorithm can also be applied to 2D images with simplified settings.
-- **Modular and Flexible**: Can be used in conjunction with other image processing techniques for tasks like segmentation and detection.
+- **Data Preprocessing**: Includes noise reduction and intensity normalization for preparing images for vascular enhancement.
+- **Applicable to 3D Volumes**: Although primarily designed for 3D images, the algorithm can also be applied to 2D images with simplified settings.
+- **Modular and Flexible**: Can be integrated with other image processing techniques for tasks such as segmentation and detection.
 
-## Requirements
-- Python 3.9
-- Cython
-- SciPy
-- Additional dependencies as listed in `requirements.txt`
+## Usage
 
-## Installation
+The script `LFT_Main.py` preprocesses and enhances volumes for vessel visualization using a line filter transform.
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/3D-Orientation-Field-Transform.git
-   cd 3D-Orientation-Field-Transform
-2. Install the required Python packages:
-   ```bash
-    pip install -r requirements.txt
-## Usage 
-   Applying the OFT Filter:
-   ```bash
-   python oft_3d.py --input <preprocessed_image> --output <enhanced_image>
+### Command-Line Arguments
+- **`OCTA_File`**: Path to the `.npy` OCTA volume file (required).
+- **`--Patch_size`**: Patch size for direction search (default: `(3, 3, 3)`).
+- **`--SizeX`**: Volume crop size in the B-scan direction (default: `400`).
+- **`--SizeZ`**: Volume crop size in the A-scan direction (default: `400`).
+- **`--NumBScans`**: Number of B-scans (default: `400`).
 
+### Process
+1. Load OCTA data from the `.npy` file.
+2. Discretize the unit sphere using Euler angles.
+3. Compute volume coordinates on an integer grid.
+4. Build an adjacency matrix based on the patch size.
+5. Apply the line filter transform for vessel enhancement.
+6. Save the enhanced volume to `Data_Folder`.
 
-python oft_3d.py --input <preprocessed_image> --output <enhanced_image>
-
-python oft_3d.py --input synthetic_volume.nii --output enhanced_volume.nii --noise_level 0.5 --tuning_params 3,1,0.5
+### Example
+```bash
+python OCTA_Preprocessing.py OCTA_Volume.npy --Patch_size 5 5 5 --SizeX 300 --SizeZ 300 --NumBScans 300
 ```
 
-# Vessel Generation with Bifurcations in 3D
 
-This code generates a synthetic 3D vascular structure with bifurcations and outputs both a filled vessel representation and a noisy volume representation. The vessel model includes random walk behavior for vessel propagation and random orientation updates, with bifurcation points introduced to simulate natural branching. This README explains the components of the code and its functionality.
+The regularerized and enhanced vascular strucutres can be visualized after installing Paraview 
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="./docs/OCTA_Raw-1.png" alt="3D Orientation Field (Sclice View) " width="600" height="400"/></td>
+      <td align="center"><img src="./docs/OCTA_Filter-1.png" alt="3D Orientation Field (Sclice View) " width="600" height="400"/></td>
+    </tr>
+  </table>
+</p>
+
+## Orientation Score Domain and Synthetic Data Generation
+
+This code generates synthetic 3D vascular structures with bifurcations and outputs both a filled vessel representation and a noisy volume representation. The vessel model includes random walk behavior for vessel propagation and random orientation updates, with bifurcation points introduced to simulate natural branching.
 
 ## Features
-- Generate synthetic vessel datasets with configurable bifurcation count.
+- Generate synthetic vessel datasets with configurable bifurcation counts.
 - Apply spatial and angular regularization.
 - Add multiplicative noise with configurable mean and standard deviation.
 - Save the generated dataset, including:
@@ -52,13 +101,29 @@ This code generates a synthetic 3D vascular structure with bifurcations and outp
   - Vessel radius.
 
 ## Usage
+
+Before generating synthetic data, 5D convolutional kernels must be precomputed and saved in the `Stochastic_Kernels` folder. These kernels are generated using a random walk on the orientation score domain, as described in the referenced paper.
+
+### Build Commands
+- Run `make clean` to clean the build environment.
+- Run `make all` to build the project.
+
+### Load Wavelet Filter Masks
+Use the following command to create filter masks for 80 orientations uniformly distributed on a 3D sphere:
+
+```bash
+python Orientation_Filter_Bank.py --Num_Angles 80
+```
+
 ### Main Script
 To run the dataset generation script, use the following command:
+
 ```bash
 python <script_name>.py <Bif_Number> <D_33> <D_44> <Vessel_Length> <mean> <std>
 ```
 
 ### Arguments
+
 | Argument         | Type      | Description                                | Default |
 |------------------|-----------|--------------------------------------------|---------|
 | `Bif_Number`     | `int`     | Number of bifurcations to generate.        | `10`    |
@@ -69,84 +134,188 @@ python <script_name>.py <Bif_Number> <D_33> <D_44> <Vessel_Length> <mean> <std>
 | `std`            | `float`   | Standard deviation of the noise.           | `3.0`   |
 
 ### Example
-Here is an example of how to run the script:
 ```bash
 python generate_vessel_data.py 10 1.0 1.0 15 0.0 3.0
 ```
 
 ## Output
-The generated dataset is saved in the directory `Data_Folder/Synthatic_Data_Sets/Synthatic_Vol_<Bif_Number>` and includes the following files:
+The generated dataset is saved in the directory `Data_Folder/Synthetic_Data_Sets/Synthetic_Vol_<Bif_Number>` and includes the following files:
 - `Volume_Syn_<Bif_Number>.npy`: 3D volume (with and without noise).
 - `Vessel_Centerline_<Bif_Number>.npy`: Vessel centerline.
 - `Vessel_Radius_Filled_<Bif_Number>.npy`: Vessel radius.
 
-## Visulaiztion 
+## Visualization
 
 ```bash
 conda create -n paraview_env -c conda-forge paraview
 conda activate paraview_env
 ```
 
-
 ## Main Functions
 
-### 1. **`Rot_Mat_from_Rot_Axis_py(Rot_vec, angle)`**
-   - Computes a rotation matrix for a given axis and angle using Rodrigues' rotation formula.
+### `Rot_Mat_from_Rot_Axis_py(Rot_vec, angle)`
+Computes a rotation matrix for a given axis and angle using Rodrigues' rotation formula.
 
-### 2. **`Rx(theta), Ry(theta), Rz(theta)`**
-   - Generate standard rotation matrices about the X, Y, and Z axes, respectively.
+### `Rx(theta), Ry(theta), Rz(theta)`
+Generates standard rotation matrices about the X, Y, and Z axes, respectively.
 
-### 3. **`Synthatic_Data_Random_Walk(...)`**
-   - The core function for generating the vessel structure.
-   - **Inputs**:
-     - `Bifurcation_Num`: Number of bifurcations in the vessel.
-     - `Init_Dir`: Initial direction of the vessel as a vector.
-     - `D_33`: Vessel length scale factor.
-     - `D_44`: Orientation randomness scale factor.
-     - `N`: Number of points per segment.
-     - `mean`, `std`: Parameters for adding noise to the vessel volume.
-   - **Outputs**:
-     - `Volume_returned`: 3D binary array representing the vessel structure.
-     - `Volume_noisy`: 3D array with added noise to simulate realistic data.
-     - `Synthatic_Vessel_out`: Vessel centerline coordinates.
-     - `Synthatic_Vessel_Filled`: Coordinates representing the filled vessel structure.
-
----
+### `Synthetic_Data_Random_Walk(...)`
+Generates the vessel structure using a random walk algorithm.
 
 ## Process Overview
 
 ### **1. Initial Setup**
-- Initializes vessel arrays and assigns the initial direction and positions.
+- Initializes vessel arrays and assigns initial direction and positions.
 - Sets up rotation matrices and scales.
 
 ### **2. Random Walk for Vessel Generation**
-- Each segment of the vessel is generated by iteratively updating the position and direction:
-  - Updates the position based on the last point and direction vector.
-  - Updates the direction using random Euler rotations and cross-product transformations.
-- Bifurcation points are introduced, and new branches are generated with random but constrained angles.
+- Updates the position and direction iteratively based on the random walk and Euler rotations.
+- Generates bifurcation points and new branches with random but constrained angles.
 
 ### **3. Filled Vessel Generation**
-- For each point on the vessel centerline, generates a radial cross-section using null space computation to create orthogonal vectors and rotates them to form a cylindrical shape.
+- Converts the vessel centerline into a filled structure using a radial cross-section.
 
 ### **4. Volume Representation**
 - Converts the vessel structure into a voxel-based representation.
-- A noisy version of the volume is generated using Gaussian noise and random binary noise.
+- Adds Gaussian noise for the noisy version.
 
 ---
 
+## 3D Orientation Score Processing
+
+This repository provides tools for creating filter masks in the Fourier domain, designed for processing 3D vascular data using orientation score transforms.
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="./docs/Wavelet_Real-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Real_2-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
+       <td align="center"><img src="./docs/Wavelet_Imag-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Imag2-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
+    </tr>
+  </table>
+</p>
 
 
+## Methods
+1. **Wavelet Filter Mask Generation**:
+   Filter masks are generated and applied for orientation score transformation in the Fourier domain.
 
-## Contributing
+2. **PDE-Based Regularization**:
+   Uses precomputed convolutional kernels from a random walk process in the orientation score domain.
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve functionality, add features, or enhance performance.
+3. **Parallel Processing**:
+   Leverages multi-core processing with `joblib` for large datasets.
 
-If you use this code in your research, please cite the original paper:
+4. **Normalization**:
+   Post-processing applies normalization techniques for standardizing output data.
 
-@article{Yeung:2024,
-  title={3D orientation field transform},
-  author={Yeung, W. C., Xiaohao L., Zizhen K., Byung-Ho},
-  journal={Pattern Analysis and Applications},
-  year={2024},
-  volume={27}
-}
+## Usage
+
+### Step 1: Prepare Filter Masks
+```bash
+python Orientation_Filter_Bank.py --Num_Angles 80
+
+```
+This creates a filterbank on the Fourier domain which real and imaginary parts defines maximal response at the centerline and the vessel boundary via convolution procedure, see figure for real and imaginary parts of the filter masks. 
+
+### Step 2: Generate Wavelet Filter Masks
+```bash
+python Orientation_Filter_Bank.py --Num_Angles 80
+```
+
+### Arguments
+- `--Num_Angles`: Number of uniformly distributed Euler angles (default: `30`).
+- `--Grid_Size`: Rectangular spatial dimensions (`X`, `Y`, `Z`) (default: `100`).
+
+### Output
+- **Filter Bank**: The generated wavelet filter masks are saved in `Filter_Mask_Orientation_Score_3D/` as `Wavelet_Filter_new.npy`.
+
+
+## 3D Orientation Score Diffusion for Data Completion and Enhancement via 3D Convolution with a Kernel on SE(3)
+
+This algorithm applies 3D convolution using kernels on SE(3) for data completion and enhancement:
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="./docs/oct_visualization_transparent_OST.gif" alt="3D Orientation Field (Sclice View) " width="600" height="600"/></td>
+    </tr>
+  </table>
+</p>
+
+## Usage
+
+Lift the vascular data to the Orientation Score Domain using the following command:
+```bash
+python 3D_Orientation_Score.py Data_Folder/Test_OCTA_Data.npy
+```
+
+The resulting transformed data will be saved in the `Data_Folder` directory as: `Orientation_Score_Data_win_size_<window>wave_size_<Wavelet_Size>.npy`
+
+The 3D convolution algorithm applied for regularization of orientation score volumes with kernels on the Special Euclidean Group (SE(3)) utilizes various kernel approximation techniques and supports the normalization of the resulting volume.
+
+## Features
+- **3D Convolution**: Applies kernels in 3D space using a variety of kernel approximation methods.
+- **Multiple Methods**: Several kernel approximation methods available, including `Kernel_2D`, `Mises_Fischer_Kernel`, `Contour_Enh`, and `Contour_Compl`.
+- **Normalization**: Post-processes the convolution result with `P-Norm Normalization`.
+
+1. **Run the 3D Convolution Script**
+
+   The script performs a 3D convolution on the provided orientation score volume (`OCTA_numpy`) using a kernel approximation method. Here’s how you can execute it:
+
+   ```bash
+   python 3D_Convolution_SE3.py --OCTA_numpy <path_to_orientation_score_volume> --Angle_Number <number_of_angles> --D_33 <diffusion_coefficient_spatial> --D_44 <diffusion_coefficient_angular> --Int_Time <integration_time> --Kernel_Size <size_of_kernel_window> --Angles_conv <number_of_nearest_orientations> --Method <kernel_approximation_method>
+   ```
+
+2. **Arguments**:
+   - `OCTA_numpy`: Path to the orientation score volume in `.npy` format.
+   - `Angle_Number`: Number of angles to use for the convolution.
+   - `D_33`: Diffusion coefficient for spatial regularization.
+   - `D_44`: Diffusion coefficient for angular regularization.
+   - `Int_Time`: Diffusion integration time.
+   - `Kernel_Size`: Size of the rectangular window on SE(3).
+   - `Angles_conv`: Number of nearest orientations for the convolution.
+   - `--Method`: Kernel approximation method. Options: `Kernel_2D`, `Mises_Fischer_Kernel`, `Contour_Enh`, `Contour_Compl` (default: `Kernel_2D`).
+
+3. **Output**:
+   The convolved volume will be saved in the `Data_Folder/` with the filename:  
+   `Conv_Vol_<Angles_conv>_<Kernel_Size>_<Method>.npy`.
+
+## Code Summary
+
+The script performs the following operations:
+- Loads the input orientation score volume from a `.npy` file.
+- Applies normalization to the orientation score volume using `P-Norm Normalization`.
+- Generates Euler angles for kernel approximation using `Euler_Angles_Sphere`.
+- Convolves the volume with kernels using the specified kernel approximation method (`Kernel_2D`, `Mises_Fischer_Kernel`, `Contour_Enh`, `Contour_Compl`).
+- Normalizes the convolved volume.
+- Saves the convolved volume to the specified directory.
+
+### Example Usage:
+
+```bash
+python 3D_Convolution_SE3.py --OCTA_numpy "Data_Folder/Orientation_Score_Volume.npy" --Angle_Number 80 --D_33 0.5 --D_44 0.8 --Int_Time 10 --Kernel_Size 100 --Angles_conv 10 --Method Kernel_2D
+```
+
+This command will apply the 3D convolution with `Kernel_2D` method and save the result in the `Data_Folder/`.
+
+## Available Methods
+- `Kernel_2D`: A basic 2D kernel approximation.
+- `Mises_Fischer_Kernel`: A kernel based on the Mises-Fisher distribution.
+- `Contour_Enh`: A kernel approximation focused on contour enhancement.
+- `Contour_Compl`: A kernel approximation for contour completion.
+
+
+## Citation
+
+The code of this repository implelements the ideas for vesselness processing of the following papers 
+
+Yeung, W. C., Xiaohao L., Zizhen K., Byung-Ho (2024). 3D orientation field transform. *Pattern Analysis and Applications*, 27.
+
+
+Portegies JM, Fick RHJ, Sanguinetti GR, Meesters SPL, Girard G, Duits R (2015) Improving Fiber Alignment in HARDI by Combining Contextual PDE Flow with Constrained Spherical Deconvolution. PLoS ONE 10(10): e0138122. https://doi.org/10.1371/journal.pone.0138122
+
+Janssen, M.H.J., Janssen, A.J.E.M., Bekkers, E.J. et al. (2018). Design and Processing of Invertible Orientation Scores of 3D Images. *J Math Imaging Vis*, 60, 1427–1458. https://doi.org/10.1007/s10851-018-0806-0
+
+Rodrigues, P., Duits, R., ter Haar Romeny, B. M., & Vilanova, A. (2010). Accelerated diffusion operators for enhancing DW-MRI. In *Proceedings of the 2nd Eurographics conference on Visual Computing for Biology and Medicine (EG VCBM'10)* (pp. 49–56). Eurographics Association, Goslar, DEU.

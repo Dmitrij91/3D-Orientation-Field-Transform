@@ -5,7 +5,7 @@ from vtk.util.numpy_support import numpy_to_vtk
 import numpy as np
 from vtkmodules.vtkCommonDataModel import vtkImageData
 from vtkmodules.util import numpy_support
-from pyevtk.hl import gridToVTK
+#from pyevtk.hl import gridToVTK
 
 def numpy_to_image(v_np):
     """Convert a numpy 2D or 3D array to a vtkImageData object.
@@ -107,7 +107,7 @@ def convert_npy_to_vtk(input_npy, output_vtk):
     print(f"Converted {input_npy} to {output_vtk}")
 
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='OCTA Volume Preprocessing Routine for Vessel Enhancement')
     parser.add_argument("vol_np",
@@ -130,9 +130,9 @@ if __name__ == '__main__':
 
     # convert volume to vtk file
     v_np = np.load(args.vol_np)
-    save_to_vtk(v_np, out_fpath)
+    save_to_vtk(v_np, out_fpath)'''
 
-'''if __name__ == "__main__":
+if __name__ == "__main__":
     import argparse
 
     # Parse command-line arguments
@@ -143,4 +143,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Run the conversion function
-    convert_npy_to_vtk(args.input_npy, args.output_vtk)'''
+    convert_npy_to_vtk(args.input_npy, args.output_vtk)

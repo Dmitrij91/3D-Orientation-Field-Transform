@@ -23,3 +23,12 @@ vtk_data_rep.ColorArrayName = ['POINTS', 'your_array_name']  # Replace 'your_arr
 
 # Step 4: Render the view
 Render()
+
+# Step 5: Save the visualization (optional)
+# Uncomment the following line if you want to save the screenshot
+# SaveScreenshot("output_image.png")
+
+# Step 6: Interact with the viewer (this will open the ParaView GUI to view the data)
+# (This step is optional as it is useful if you want to continue interacting with the visualization)
+# You can leave it running to keep the GUI open for further manipulation.
+interact()

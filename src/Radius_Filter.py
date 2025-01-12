@@ -11,22 +11,23 @@ parser.add_argument("OCTA_numpy",
     help="string_path_to_Volume_in_npy_format")
 
 parser.add_argument("List_Rad",
-    type=list,
+    type=str,
     help="List_Vessel_Radius")
 
 parser.add_argument("h",
-    type=str,
+    type=int,
     help="Discretization_of_Radius_Interval")
 args = parser.parse_args()
 
-
+Radius_Vessels =  list(map(int,args.List_Rad.split(",")))
+print(Radius_Vessels)
+Test_Oct_Cropped = np.load(args.OCTA_numpy)
 Scale_size = args.h
 
 Filter_Volume_OCT = []
 
 for radius in Radius_Vessels:
-        
-    rsp,_,_  = OOF_Func.response(ndimage.filters.gaussian_filter(Test_Oct_Cropped,sigma = 1),radii = np.linspace(radius,radius+args.h,10),rsptype='oof')
+    rsp,_,_  = OOF_Func.response(ndimage.filters.gaussian_filter(Test_Oct_Cropped,sigma = 1),radii = np.linspace(radius,radius+args.h,5),rsptype='oof')
     Filter_Volume_OCT.append(rsp)
 
 Max_Radius_Vol = np.max(np.array(Filter_Volume_OCT),axis = 0)

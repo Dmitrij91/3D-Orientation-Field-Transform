@@ -4,17 +4,13 @@ import argparse
 import os.path
 import sys
 from Line_Filter_Transform import*
-import vol_viz_OCTA
-from vol_viz_OCTA import OCTScan
-from vol_viz_OCTA import draw
 from Distance_Utilities import dist
 from Graph_Build import adj_matrix
-importlib.reload(vol_viz_OCTA)
 from Fast_Marching_Cython import Line_Filter_Transform_Cython
 
 parser = argparse.ArgumentParser(description='OCTA_Volume_Preprocessing_Routine_for_Vessel_Enhancement')
 
-parser.add_argument("OCTA_Vol_File",
+parser.add_argument("OCTA_File",
     type=str,
     help="Path_to_File")
 parser.add_argument("--Patch_size",
@@ -35,40 +31,14 @@ parser.add_argument("--NumBScans",
     default=400)
 
 args = parser.parse_args()
-assert os.path.isfile(args.OCTA_Vol_File), f"File {args.OCTA_Vol_File} not found."
-assert args.OCTA_Vol_File.endswith(".vol")
+assert os.path.isfile(args.OCTA_File), f"File {args.OCTA_File} not found."
+assert args.OCTA_File.endswith(".npy")
 
 GAMMA = 4
 
 
-file = open(args.OCTA_Vol_File, "rb").read()
-oct = OCTScan(file)
-oct.filename = args.OCTA_Vol_File.split(os.path.sep)[-1]
+octdata_full_Test = np.load(args.OCTA_File)
 
-'Load OCTA Data'
-
-X = oct.headerinfo.SizeX
-Y = oct.headerinfo.NumBScans
-Z = oct.headerinfo.SizeZ
-
-octdata_full  = np.zeros((Z,X,Y)) 
-segments_full = np.zeros((oct.bscans[0].segments.shape[0], X, Y))
-for k in range(Y):
-    octdata_full[:,:,k] = ((oct.bscans)[k]).data
-    segments_full[:,:,k] = ((oct.bscans)[k]).segments
-    
-    ' Remove_Scanner_Artifacts '
-
-octdata_full[octdata_full > 10] = 1e-10
-octdata_full[octdata_full <= 0] = 1e-10
-
-# Slice Volume
-
-octdata_full_Test = octdata_full[47:47+args.SizeZ,56:56+args.SizeX,56:56+args.NumBScans] 
-
-'Save_Cropped_Volume'
-
-#np.save(os.path.join("Data_Folder/","octdata_full_Test"), octdata_full_Test.astype(np.float32))
 
 ' Uniform Discretization of the unit Sphere for by Euler angles '
 

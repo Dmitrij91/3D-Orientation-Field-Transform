@@ -58,4 +58,4 @@ Conv_Vol = P_Norm_Normalization(np.array(Conv_Vol),p = 2)
 
 ' Save Volume '
 
-np.save(os.path.join('/scratch/dmitrij/Datafolder/','Conv_Vol_'+str(args.Angles_conv)+'_'+str(args.Kernel_Size)+'_'+args.Method),np.array(Conv_Vol).astype(np.float32))
+np.save(os.path.join('Data_Folder/','Conv_Vol_'+str(args.Angles_conv)+'_'+str(args.Kernel_Size)+'_'+args.Method),np.array(Conv_Vol).astype(np.float32))
