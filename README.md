@@ -11,15 +11,14 @@ The **3D Orientation Field Transform (OFT)** algorithm is based on research that
 The line integral operator is defined by:
 
 $$
-{\mathcal{F}_{1}}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad \mathcal{F}_{2}[\mathcal{Q}] (x)=\argmax_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
-$$
-
-
-$$
 \mathcal{R}[I] (x,\hat{d})=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\varepsilon/2}^{\varepsilon/2}I(x+s\hat{d})\exp\left(-\frac{s^{2}}{2\sigma^{2}}\right)\mathrm{d}s,
 $$
 
 This operator defines the orientation field transform by maximizing the intensity response over directions $d \in \mathbb{R}^3$, uniformly distributed over the 2-sphere.
+
+$$
+\mathcal{F}_{1}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad \mathcal{F}_{2}[\mathcal{Q}] (x)=\argmax_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
+$$
 
 ### Mean and Variance Transforms
 
