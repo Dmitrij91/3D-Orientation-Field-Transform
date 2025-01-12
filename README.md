@@ -11,7 +11,7 @@ The **3D Orientation Field Transform (OFT)** algorithm is based on research that
 The line integral operator is defined by:
 
 $$
-{\mathcal{F}_{1}} [{\mathcal{R}}] (x)=\operatorname*{max}_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad \mathcal{F}_{2}[\mathcal{Q}] (x)=\arg\operatorname*{max}_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
+{\mathcal{F}_{1}}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad \mathcal{F}_{2}[\mathcal{Q}] (x)=\argmax_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
 $$
 
 
