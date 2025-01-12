@@ -19,7 +19,7 @@ This operator defines the orientation field transform by maximizing the intensit
 
 
 $$
-F_{1}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad F_{2}[\mathcal{Q}] (x)= argmax_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
+F_{1}[{\mathcal{R}}] (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}}) \qquad F_{2}[\mathcal{Q}] (x)= \arg\max \limits_{{\hat{d}}\in\bar{V}^{3}}\mathcal{Q}[I] (x,\hat{b}),
 $$
 
 
