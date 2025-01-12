@@ -18,7 +18,7 @@ This operator defines the orientation field transform by maximizing the intensit
 
 $$
 \mathcal{F}_{1} [{\mathcal{R}}]  (x)=\max_{{\bar{V}}^{3}}{\mathcal{R}}[I] (x,{\hat{d}})
-
+$$
 ### Mean and Variance Transforms
 
 The **mean** and **variance** transforms are given by:
