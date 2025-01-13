@@ -87,8 +87,8 @@ The regularerized and enhanced vascular strucutres can be visualized after insta
 <p align="center">
   <table>
     <tr>
-      <td align="center"><img src="./docs/OCTA_Raw-1.png" alt="3D Orientation Field (Sclice View) " width="600" height="400"/></td>
-      <td align="center"><img src="./docs/OCTA_Filter-1.png" alt="3D Orientation Field (Sclice View) " width="600" height="400"/></td>
+      <td align="center"><img src="./docs/OCTA_Raw-1.png" alt="3D Orientation Field (Sclice View) " width="700" height="400"/></td>
+      <td align="center"><img src="./docs/OCTA_Filter-1.png" alt="3D Orientation Field (Sclice View) " width="700" height="400"/></td>
     </tr>
   </table>
 </p>
@@ -194,10 +194,10 @@ This repository provides tools for creating filter masks in the Fourier domain, 
 <p align="center">
   <table>
     <tr>
-      <td align="center"><img src="./docs/Wavelet_Real-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
-      <td align="center"><img src="./docs/Wavelet_Real_2-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
-       <td align="center"><img src="./docs/Wavelet_Imag-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
-      <td align="center"><img src="./docs/Wavelet_Imag2-1.png" alt="3D Orientation Field (Sclice View) " width="300" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Real-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Real_2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
+       <td align="center"><img src="./docs/Wavelet_Imag-1.png" alt="3D Orientation Field (Sclice View) " width=400" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Imag2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
     </tr>
   </table>
 </p>
@@ -313,15 +313,30 @@ This command will apply the 3D convolution with `Kernel_2D` method and save the 
 - `Contour_Compl`: A kernel approximation for contour completion.
 
 
+## Dataset
+
+This project utilizes the [OCTA-500 dataset](https://ieee-dataport.org/open-access/octa-500), an open-access dataset available on the IEEE DataPort platform. The OCTA-500 dataset is a valuable resource for research in optical coherence tomography angiography and related areas.
+
+For more information about the dataset, visit the [OCTA-500 dataset page](https://ieee-dataport.org/open-access/octa-500).
+
+If you use the OCTA-500 dataset in your work, please cite the following paper:
+
+>Mingchao Li, Kun Huang, Qiuzhuo Xu, Jiadong Yang, Yuhan Zhang, Zexuan Ji, Keren Xie, Songtao Yuan, Qinghuai Liu, and Qiang Chen.  
+>"OCTA-500: A Retinal Dataset for Optical Coherence Tomography Angiography Study," *Medical Image Analysis*, 2024: 103092.  
+>[DOI:10.1016/j.media.2024.103092](https://doi.org/10.1016/j.media.2024.103092)
+
+
+
+
 ## Citation
 
 The code of this repository implelements the ideas for vesselness processing of the following papers 
 
-Yeung, W. C., Xiaohao L., Zizhen K., Byung-Ho (2024). 3D orientation field transform. *Pattern Analysis and Applications*, 27.
+>Yeung, W. C., Xiaohao L., Zizhen K., Byung-Ho (2024). 3D orientation field transform. *Pattern Analysis and Applications*, 27.
 
 
-Portegies JM, Fick RHJ, Sanguinetti GR, Meesters SPL, Girard G, Duits R (2015) Improving Fiber Alignment in HARDI by Combining Contextual PDE Flow with Constrained Spherical Deconvolution. PLoS ONE 10(10): e0138122. https://doi.org/10.1371/journal.pone.0138122
+>Portegies JM, Fick RHJ, Sanguinetti GR, Meesters SPL, Girard G, Duits R (2015) Improving Fiber Alignment in HARDI by Combining Contextual PDE Flow with Constrained Spherical >Deconvolution. PLoS ONE 10(10): e0138122. https://doi.org/10.1371/journal.pone.0138122
 
-Janssen, M.H.J., Janssen, A.J.E.M., Bekkers, E.J. et al. (2018). Design and Processing of Invertible Orientation Scores of 3D Images. *J Math Imaging Vis*, 60, 1427–1458. https://doi.org/10.1007/s10851-018-0806-0
+>Janssen, M.H.J., Janssen, A.J.E.M., Bekkers, E.J. et al. (2018). Design and Processing of Invertible Orientation Scores of 3D Images. *J Math Imaging Vis*, 60, 1427–1458. https://doi.>org/10.1007/s10851-018-0806-0
 
-Rodrigues, P., Duits, R., ter Haar Romeny, B. M., & Vilanova, A. (2010). Accelerated diffusion operators for enhancing DW-MRI. In *Proceedings of the 2nd Eurographics conference on Visual Computing for Biology and Medicine (EG VCBM'10)* (pp. 49–56). Eurographics Association, Goslar, DEU.
+>Rodrigues, P., Duits, R., ter Haar Romeny, B. M., & Vilanova, A. (2010). Accelerated diffusion operators for enhancing DW-MRI. In *Proceedings of the 2nd Eurographics conference on >Visual Computing for Biology and Medicine (EG VCBM'10)* (pp. 49–56). Eurographics Association, Goslar, DEU.
