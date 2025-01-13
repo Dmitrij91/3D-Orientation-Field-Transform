@@ -87,8 +87,8 @@ The regularerized and enhanced vascular strucutres can be visualized after insta
 <p align="center">
   <table>
     <tr>
-      <td align="center"><img src="./docs/OCTA_Raw-1.png" alt="3D Orientation Field (Sclice View) " width="700" height="400"/></td>
-      <td align="center"><img src="./docs/OCTA_Filter-1.png" alt="3D Orientation Field (Sclice View) " width="700" height="400"/></td>
+      <td align="center"><img src="./docs/OCTA_Raw-1.png" alt="3D Orientation Field (Sclice View) " width="450" height="300"/></td>
+      <td align="center"><img src="./docs/OCTA_Filter-1.png" alt="3D Orientation Field (Sclice View) " width="450" height="300"/></td>
     </tr>
   </table>
 </p>
@@ -194,10 +194,10 @@ This repository provides tools for creating filter masks in the Fourier domain, 
 <p align="center">
   <table>
     <tr>
-      <td align="center"><img src="./docs/Wavelet_Real-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
-      <td align="center"><img src="./docs/Wavelet_Real_2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
-       <td align="center"><img src="./docs/Wavelet_Imag-1.png" alt="3D Orientation Field (Sclice View) " width=400" height="300"/></td>
-      <td align="center"><img src="./docs/Wavelet_Imag2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="300"/></td>
+      <td align="center"><img src="./docs/Wavelet_Real-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="250"/></td>
+      <td align="center"><img src="./docs/Wavelet_Real_2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="250"/></td>
+       <td align="center"><img src="./docs/Wavelet_Imag-1.png" alt="3D Orientation Field (Sclice View) " width=400" height="250"/></td>
+      <td align="center"><img src="./docs/Wavelet_Imag2-1.png" alt="3D Orientation Field (Sclice View) " width="400" height="250"/></td>
     </tr>
   </table>
 </p>
